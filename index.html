@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malířství a lakýrnictví Kadeřábek</title>
+    <link rel="preload" as="image" href="hlavni-fotka.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        section { scroll-margin-top: 5rem; }
     </style>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1e3a8a', /* Jednotná modrá barva pro hlavičku, nadpisy a patičku */
+                        primary: '#1e3a8a',
                     }
                 }
             }
@@ -24,63 +24,122 @@
 </head>
 <body class="antialiased bg-white text-slate-800">
 
-    <!-- Hlavička s nadpisem a navigací -->
-    <nav class="bg-primary sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-            <div class="flex flex-col lg:flex-row justify-between items-center py-5">
+    <!-- Horní navigace přes úvodní obrázek -->
+    <header class="relative min-h-screen flex flex-col justify-between isolate overflow-hidden">
+        <!-- Optimizované načítání pozadí jako klasický obrázek (zabrání zasekávání při scrollování nahoru) -->
+        <img src="hlavni-fotka.jpg" alt="" class="absolute inset-0 w-full h-full object-cover -z-20" loading="eager" decoding="sync">
+        <!-- Tmavý překryv pro dokonalou čitelnost textu -->
+        <div class="absolute inset-0 bg-black/50 -z-10"></div>
+
+        <!-- Plovoucí navigační lišta, zcela průhledná -->
+        <nav class="relative z-50 w-full bg-transparent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    
+                    <!-- Logo / Název firmy -->
+                    <a href="#" class="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-widest uppercase hover:text-blue-200 transition-colors">
+                        Malířství a lakýrnictví Kadeřábek
+                    </a>
+
+                    <!-- Tlačítko mobilního menu -->
+                    <button id="mobile-menu-btn" type="button" class="lg:hidden text-white hover:text-blue-200 focus:outline-none p-2" aria-label="Menu">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Navigační odkazy pro desktop -->
+                    <ul class="hidden lg:flex items-center space-x-8 text-sm md:text-base font-semibold text-white/95">
+                        <li><a href="#o-mne" class="hover:text-blue-200 transition-colors">O mně</a></li>
+                        <li><a href="#sluzby" class="hover:text-blue-200 transition-colors">Služby</a></li>
+                        <li><a href="#reference" class="hover:text-blue-200 transition-colors">Reference</a></li>
+                        <li><a href="#cenik" class="hover:text-blue-200 transition-colors">Ceník</a></li>
+                        <li><a href="#kontakt" class="hover:text-blue-200 transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Mobilní rozbalovací menu -->
+                <div id="mobile-menu" class="hidden lg:hidden pb-6 pt-4">
+                    <ul class="flex flex-col space-y-4 text-base font-semibold text-white/90">
+                        <li><a href="#o-mne" class="mobile-nav-link block hover:text-blue-200">O mně</a></li>
+                        <li><a href="#sluzby" class="mobile-nav-link block hover:text-blue-200">Služby</a></li>
+                        <li><a href="#reference" class="mobile-nav-link block hover:text-blue-200">Reference</a></li>
+                        <li><a href="#cenik" class="mobile-nav-link block hover:text-blue-200">Ceník</a></li>
+                        <li><a href="#kontakt" class="mobile-nav-link block hover:text-blue-200">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hlavní středový obsah Hero sekce -->
+        <div class="relative z-10 flex-grow flex items-center justify-center text-center px-4 py-16">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white uppercase tracking-wider drop-shadow-lg leading-tight">
+                    Malířské a lakýrnické práce
+                </h1>
                 
-                <!-- Nadpis -->
-                <a href="#" class="text-xl md:text-2xl font-bold text-white tracking-widest uppercase mb-5 lg:mb-0 text-center lg:text-left hover:text-blue-100 transition-colors">
-                    Malířství a lakýrnictví Kadeřábek
-                </a>
+                <!-- Modrá linka pod nadpisem -->
+                <div class="w-24 h-1.5 bg-blue-500 mx-auto my-6"></div>
                 
-                <!-- Odkazy -->
-                <ul class="flex flex-wrap justify-center gap-x-5 md:gap-x-7 gap-y-3 text-sm md:text-base font-semibold text-white/90">
-                    <li><a href="#uvod" class="hover:text-white hover:underline underline-offset-4 transition-all">Úvod</a></li>
-                    <li><a href="#o-mne" class="hover:text-white hover:underline underline-offset-4 transition-all">O mně</a></li>
-                    <li><a href="#sluzby" class="hover:text-white hover:underline underline-offset-4 transition-all">Služby</a></li>
-                    <li><a href="#reference" class="hover:text-white hover:underline underline-offset-4 transition-all">Reference</a></li>
-                    <li><a href="#cenik" class="hover:text-white hover:underline underline-offset-4 transition-all">Ceník</a></li>
-                    <li><a href="#kontakt" class="hover:text-white hover:underline underline-offset-4 transition-all">Kontakt</a></li>
-                </ul>
+                <!-- Přirozené tlačítko pro kontakt -->
+                <div class="mt-8">
+                    <a href="#kontakt" class="inline-block px-8 py-3 bg-transparent hover:bg-white/15 text-white font-medium border border-white/50 backdrop-blur-sm transition-all">
+                        Kontaktujte mě
+                    </a>
+                </div>
             </div>
         </div>
-    </nav>
+
+        <!-- Spodní indikátor / prázdný prostor -->
+        <div class="relative z-10 pb-8 text-center">
+            <a href="#o-mne" class="text-white/70 hover:text-white inline-block animate-bounce transition-colors" aria-label="Přejít na obsah">
+                <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </a>
+        </div>
+    </header>
 
     <main>
-        <!-- Úvod -->
-        <section id="uvod" class="max-w-7xl mx-auto px-4 py-8 md:py-12">
-            <img src="hlavni-fotka.jpg" alt="Úvodní fotka - váleček a barva" class="w-full h-[50vh] md:h-[65vh] object-cover shadow-lg">
-        </section>
-
         <!-- O mně -->
-        <section id="o-mne" class="py-16 md:py-24">
+        <section id="o-mne" class="py-16 md:py-24 bg-white">
             <div class="max-w-3xl mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8 uppercase tracking-wide">O mně</h2>
-                <p class="text-lg md:text-xl leading-relaxed text-slate-600">
-                    [Zde si můžete doplnit informace o vaší praxi – například jak dlouho obor děláte, na co se přesně specializujete, jaký je váš přístup k zákazníkům a co je pro vás při práci nejdůležitější.]
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 uppercase tracking-wide">O mně</h2>
+                <div class="w-16 h-1 bg-blue-500 mx-auto mb-8"></div>
+                
+                <div class="space-y-6 text-lg md:text-xl leading-relaxed text-slate-600">
+                    <p>
+                        Nabízím profesionální a komplexní malířské a lakýrnické práce pro byty, rodinné domy, kanceláře i nebytové prostory. Zakládám si na precizním řemeslném zpracování, spolehlivosti a vstřícném přístupu ke každému zákazníkovi.
+                    </p>
+                    <p>
+                        Při realizacích pracuji s osvědčenými a kvalitními materiály, dbám na důkladnou přípravu podkladu, čistotu pracovního prostředí a šetrné zacházení s vaším interiérem od zahájení prací až po finální úklid.
+                    </p>
+                </div>
             </div>
         </section>
 
         <!-- Služby -->
-        <section id="sluzby" class="py-16 md:py-24">
+        <section id="sluzby" class="py-12 md:py-16 bg-slate-50 border-y border-slate-200/80">
             <div class="max-w-6xl mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-12 text-center uppercase tracking-wide">Moje služby</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center uppercase tracking-wide">Moje služby</h2>
+                <div class="w-16 h-1 bg-blue-500 mx-auto mb-10"></div>
                 
-                <div class="flex flex-col md:flex-row gap-12 lg:gap-20 items-start">
+                <div class="flex flex-col md:flex-row gap-12 lg:gap-16 items-start">
                     <!-- Obrázek u služeb -->
                     <div class="w-full md:w-1/2">
-                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80" alt="Ukázka práce a malířských potřeb" class="w-full h-auto object-cover shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80" alt="Ukázka práce a malířských potřeb" class="w-full h-auto border border-slate-200 object-cover">
                     </div>
                     
                     <!-- Texty a odrážky služeb -->
-                    <div class="w-full md:w-1/2 space-y-12">
+                    <div class="w-full md:w-1/2 space-y-6 mt-4 md:mt-0">
                         
                         <!-- Blok Práce -->
                         <div>
-                            <h3 class="text-2xl font-bold text-slate-800 mb-6 uppercase tracking-wide">Práce</h3>
-                            <ul class="space-y-3 text-lg text-slate-600 list-disc ml-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-primary mb-3 uppercase tracking-wide flex items-center gap-3">
+                                <span class="w-2.5 h-2.5 bg-blue-500 inline-block"></span>
+                                Práce
+                            </h3>
+                            <ul class="space-y-2 text-base md:text-lg text-slate-600 list-disc ml-6">
                                 <li>Malířské práce</li>
                                 <li>Lakýrnické práce</li>
                                 <li>Obnova dveří a interiéru systémem VARIOPAINT, COLORFLEK, AQUAROLL</li>
@@ -90,8 +149,11 @@
                         
                         <!-- Blok Produkty -->
                         <div>
-                            <h3 class="text-2xl font-bold text-slate-800 mb-6 uppercase tracking-wide">Produkty a činnosti</h3>
-                            <ul class="space-y-3 text-lg text-slate-600 list-disc ml-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-primary mb-3 uppercase tracking-wide flex items-center gap-3">
+                                <span class="w-2.5 h-2.5 bg-blue-500 inline-block"></span>
+                                Produkty a činnosti
+                            </h3>
+                            <ul class="space-y-2 text-base md:text-lg text-slate-600 list-disc ml-6">
                                 <li>Nátěry a malby</li>
                                 <li>Výmalba interiérů</li>
                                 <li>Aplikace tapet</li>
@@ -106,21 +168,22 @@
         </section>
 
         <!-- Reference -->
-        <section id="reference" class="py-16 md:py-24">
+        <section id="reference" class="py-16 md:py-24 bg-white">
             <div class="max-w-6xl mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-12 text-center uppercase tracking-wide">Reference</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center uppercase tracking-wide">Reference</h2>
+                <div class="w-16 h-1 bg-blue-500 mx-auto mb-14"></div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="aspect-square bg-slate-50 border-2 border-slate-300 border-dashed flex items-center justify-center p-6 text-center text-slate-500">
+                    <div class="aspect-square bg-slate-50 border border-slate-300 flex items-center justify-center p-6 text-center text-slate-500">
                         <p>[Zde doplníte fotku vaší práce, pokud budete chtít.]</p>
                     </div>
-                    <div class="aspect-square bg-slate-50 border-2 border-slate-300 border-dashed flex items-center justify-center p-6 text-center text-slate-500">
+                    <div class="aspect-square bg-slate-50 border border-slate-300 flex items-center justify-center p-6 text-center text-slate-500">
                         <p>[Zde doplníte fotku vaší práce, pokud budete chtít.]</p>
                     </div>
-                    <div class="aspect-square bg-slate-50 border-2 border-slate-300 border-dashed flex items-center justify-center p-6 text-center text-slate-500">
+                    <div class="aspect-square bg-slate-50 border border-slate-300 flex items-center justify-center p-6 text-center text-slate-500">
                         <p>[Zde doplníte fotku vaší práce, pokud budete chtít.]</p>
                     </div>
-                    <div class="aspect-square bg-slate-50 border-2 border-slate-300 border-dashed flex items-center justify-center p-6 text-center text-slate-500">
+                    <div class="aspect-square bg-slate-50 border border-slate-300 flex items-center justify-center p-6 text-center text-slate-500">
                         <p>[Zde doplníte fotku vaší práce, pokud budete chtít.]</p>
                     </div>
                 </div>
@@ -128,13 +191,22 @@
         </section>
 
         <!-- Ceník -->
-        <section id="cenik" class="py-16 md:py-32">
+        <section id="cenik" class="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
             <div class="max-w-3xl mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8 uppercase tracking-wide">Ceník</h2>
-                <p class="text-xl md:text-2xl text-slate-600 leading-relaxed">
-                    Ceník bude doplněn konkrétně na vaše uvážení,<br class="hidden md:block">
-                    nebo bude sestaven po osobní domluvě.
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 uppercase tracking-wide">Ceník</h2>
+                <div class="w-16 h-1 bg-blue-500 mx-auto mb-8"></div>
+                
+                <div class="mt-8">
+                    <p class="text-xl md:text-2xl text-slate-800 font-semibold leading-relaxed mb-4">
+                        Cena prací bude vyřešena po osobní domluvě.
+                    </p>
+
+                    <div class="mt-10">
+                        <a href="#kontakt" class="inline-block px-8 py-3 bg-primary hover:bg-blue-900 text-white font-medium shadow-sm hover:shadow-md transition-all">
+                            Kontaktovat pro nezávaznou domluvu
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -143,13 +215,14 @@
     <!-- Kontakt -->
     <footer id="kontakt" class="bg-primary text-white py-16">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center uppercase tracking-wide">Kontakt</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center uppercase tracking-wide">Kontakt</h2>
+            <div class="w-16 h-1 bg-white mx-auto mb-14"></div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 text-blue-100">
                 
                 <!-- Adresa -->
                 <div class="flex items-start gap-4">
-                    <div class="bg-white/10 p-3 rounded-lg flex-shrink-0">
+                    <div class="bg-white/10 p-3 flex-shrink-0">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
                     <div>
@@ -160,7 +233,7 @@
 
                 <!-- Telefony -->
                 <div class="flex items-start gap-4">
-                    <div class="bg-white/10 p-3 rounded-lg flex-shrink-0">
+                    <div class="bg-white/10 p-3 flex-shrink-0">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                     </div>
                     <div>
@@ -175,7 +248,7 @@
 
                 <!-- Fakturační údaje -->
                 <div class="flex items-start gap-4">
-                    <div class="bg-white/10 p-3 rounded-lg flex-shrink-0">
+                    <div class="bg-white/10 p-3 flex-shrink-0">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
                     <div>
@@ -186,11 +259,39 @@
 
             </div>
             
+            <!-- Mapa -->
+            <div class="w-full h-80 md:h-96 mt-16">
+                <iframe 
+                    src="https://maps.google.com/maps?q=Mal%C3%AD%C5%99stv%C3%AD%20a%20lak%C3%BDrnictv%C3%AD%20Kade%C5%99%C3%A1bek,%20Hostomice&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+            
             <div class="mt-16 pt-8 border-t border-blue-800 text-center text-sm text-blue-200">
                 <p>&copy; 2026 Malířství a lakýrnictví Kadeřábek. Všechna práva vyhrazena.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Skript pro mobilní menu -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
